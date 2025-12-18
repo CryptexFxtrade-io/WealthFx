@@ -1,13 +1,35 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>FxWealth Admin</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FxWealth | Admin Dashboard</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <h2>Admin Dashboard</h2>
-  <h3>Users</h3>
-  <ul id="users"></ul>
+  <div class="container">
+    <h1>Admin Dashboard</h1>
+    <button onclick="logout()">Logout</button>
 
-<script src="js/admin.js"></script>
+    <h2>Users</h2>
+    <div id="users"></div>
+
+    <h2>Deposits</h2>
+    <div id="deposits"></div>
+
+    <h2>Withdrawals</h2>
+    <div id="withdrawals"></div>
+
+    <h2>Create Investment Plan</h2>
+    <input type="text" id="planName" placeholder="Plan Name">
+    <input type="number" id="planMin" placeholder="Min Amount">
+    <input type="number" id="planMax" placeholder="Max Amount">
+    <input type="number" id="planROI" placeholder="ROI %">
+    <input type="number" id="planDuration" placeholder="Duration (days)">
+    <button onclick="createPlan()">Create Plan</button>
+  </div>
+
+  <script src="js/auth.js"></script>
+  <script src="js/admin.js"></script>
 </body>
 </html>
