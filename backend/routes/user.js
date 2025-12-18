@@ -1,12 +1,12 @@
-const express = require("express");
-const router = express.Router();
-const auth = require("../middleware/auth"); // Auth middleware
-const User = require("../models/User"); // User model
-const Investment = require("../models/Investment"); // Investment model
+// routes/user.js
+import express from "express";
+import auth from "../middleware/auth.js";
+import User from "../models/User.js";
+import Investment from "../models/Investment.js";
 
-// =======================================
+const router = express.Router();
+
 // GET CURRENT USER PROFILE
-// =======================================
 router.get("/", auth, async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select("-password");
@@ -18,9 +18,7 @@ router.get("/", auth, async (req, res) => {
   }
 });
 
-// =======================================
 // GET USER INVESTMENTS
-// =======================================
 router.get("/investments", auth, async (req, res) => {
   try {
     const investments = await Investment.find({ userId: req.user.id }).populate("planId");
@@ -31,9 +29,7 @@ router.get("/investments", auth, async (req, res) => {
   }
 });
 
-// =======================================
 // UPDATE USER PROFILE
-// =======================================
 router.put("/", auth, async (req, res) => {
   try {
     const { name, email } = req.body;
@@ -49,9 +45,7 @@ router.put("/", auth, async (req, res) => {
   }
 });
 
-// =======================================
 // DELETE USER
-// =======================================
 router.delete("/", auth, async (req, res) => {
   try {
     await User.findByIdAndDelete(req.user.id);
@@ -62,4 +56,4 @@ router.delete("/", auth, async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;
