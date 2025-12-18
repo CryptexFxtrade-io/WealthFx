@@ -1,22 +1,25 @@
-const BASE_URL = "https://wealthfx-net.onrender.com"; // Your live backend
+const BASE_URL = "https://wealthfx-net.onrender.com";
 let jwtToken = localStorage.getItem("jwt") || "";
 
-// Show/Hide Forms
-function showRegister() {
-  document.getElementById("loginForm").classList.add("hidden");
-  document.getElementById("registerForm").classList.remove("hidden");
-}
-
-function showLogin() {
-  document.getElementById("registerForm").classList.add("hidden");
-  document.getElementById("loginForm").classList.remove("hidden");
-}
-
-// Show Dashboard
-function showDashboard() {
+// Tab switching
+function showTab(tab) {
   document.getElementById("loginForm").classList.add("hidden");
   document.getElementById("registerForm").classList.add("hidden");
-  document.getElementById("dashboard").classList.remove("hidden");
+  document.getElementById("dashboard").classList.add("hidden");
+
+  document.getElementById("tab-login").classList.remove("bg-blue-600");
+  document.getElementById("tab-register").classList.remove("bg-green-600");
+
+  if (tab === "login") {
+    document.getElementById("loginForm").classList.remove("hidden");
+    document.getElementById("tab-login").classList.add("bg-blue-600");
+  } else if (tab === "register") {
+    document.getElementById("registerForm").classList.remove("hidden");
+    document.getElementById("tab-register").classList.add("bg-green-600");
+  } else if (tab === "dashboard") {
+    document.getElementById("dashboard").classList.remove("hidden");
+    document.getElementById("tab-dashboard").classList.remove("hidden");
+  }
 }
 
 // Register
@@ -50,7 +53,7 @@ async function login() {
   if (res.ok && data.token) {
     jwtToken = data.token;
     localStorage.setItem("jwt", jwtToken);
-    showDashboard();
+    showTab("dashboard");
   } else {
     document.getElementById("loginResult").innerText = data.message || JSON.stringify(data);
   }
@@ -60,11 +63,10 @@ async function login() {
 function logout() {
   localStorage.removeItem("jwt");
   jwtToken = "";
-  document.getElementById("dashboard").classList.add("hidden");
-  document.getElementById("loginForm").classList.remove("hidden");
+  showTab("login");
 }
 
-// Fetch Investments
+// Fetch investments
 async function getInvestments() {
   if (!jwtToken) return alert("Please login first!");
 
@@ -76,7 +78,7 @@ async function getInvestments() {
   document.getElementById("investments").innerText = JSON.stringify(data, null, 2);
 }
 
-// Auto-login if JWT exists
+// Auto-login
 if (jwtToken) {
-  showDashboard();
+  showTab("dashboard");
 }
