@@ -1,12 +1,10 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const PlanSchema = new mongoose.Schema({
-  name: String,
-  min: Number,
-  max: Number,
-  roiPercent: Number,
-  durationDays: Number,
-  active: { type: Boolean, default: true }
+  name: { type: String, required: true },
+  duration: { type: Number, required: true }, // in days
+  profitPercent: { type: Number, required: true },
 });
 
-module.exports = mongoose.model("Plan", PlanSchema);
+const Plan = mongoose.model("Plan", PlanSchema);
+export default Plan; // ✅ Default export
