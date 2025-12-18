@@ -9,10 +9,10 @@
 <body class="bg-gray-100 min-h-screen flex items-center justify-center">
 
   <div class="w-full max-w-3xl bg-white p-8 rounded-xl shadow-xl">
-    
+
     <!-- Header -->
     <h1 class="text-3xl font-bold text-center text-blue-600 mb-6">FxWealth</h1>
-    
+
     <!-- Tabs -->
     <div class="flex justify-center mb-6 space-x-4">
       <button id="tab-login" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600" onclick="showTab('login')">Login</button>
@@ -36,7 +36,8 @@
     </div>
 
     <div id="dashboard" class="hidden">
-      <h2 class="text-2xl font-semibold mb-4">Your Investments</h2>
+      <h2 class="text-2xl font-semibold mb-4">Your Dashboard</h2>
+      <p class="mb-2">Balance: <span id="balance">Loading...</span></p>
       <button onclick="getInvestments()" class="mb-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Fetch Investments</button>
       <pre id="investments" class="bg-gray-100 p-4 rounded shadow h-48 overflow-auto"></pre>
       <button onclick="logout()" class="mt-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">Logout</button>
@@ -46,4 +47,4 @@
 
   <script src="script.js"></script>
 </body>
-</html>
+        </html>
