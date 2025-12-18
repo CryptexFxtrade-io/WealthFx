@@ -1,11 +1,13 @@
 import mongoose from "mongoose";
 
 const InvestmentSchema = new mongoose.Schema({
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
-  planId: { type: mongoose.Schema.Types.ObjectId, ref: "Plan", required: true },
-  amount: { type: Number, required: true },
-  date: { type: Date, default: Date.now },
-});
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  planId: { type: mongoose.Schema.Types.ObjectId, ref: "InvestmentPlan" },
+  amount: Number,
+  profit: Number,
+  startDate: Date,
+  endDate: Date,
+  status: { type: String, default: "active" }
+}, { timestamps: true });
 
-const Investment = mongoose.model("Investment", InvestmentSchema);
-export default Investment;
+export default mongoose.model("Investment", InvestmentSchema);
