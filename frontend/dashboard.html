@@ -3,37 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FxWealth | User Dashboard</title>
-  <link rel="stylesheet" href="css/style.css">
+  <title>FxWealth | Dashboard</title>
+  <link href="style.css" rel="stylesheet">
 </head>
-<body>
-  <div class="container">
-    <h1>User Dashboard</h1>
-    <button onclick="logout()">Logout</button>
+<body class="bg-gray-100 p-4">
+  <h1 class="text-3xl font-bold mb-4">Dashboard</h1>
 
-    <div id="profile"></div>
+  <button onclick="getInvestments()" class="bg-blue-500 text-white px-4 py-2 rounded mb-4">Fetch Investments</button>
+  <pre id="investments" class="bg-white p-4 rounded shadow"></pre>
+  <button onclick="logout()" class="mt-4 bg-red-500 text-white px-4 py-2 rounded">Logout</button>
 
-    <h2>Deposit Funds</h2>
-    <input type="number" id="depositAmount" placeholder="Amount">
-    <input type="text" id="depositCurrency" placeholder="Currency (BTC/ETH/USDT)">
-    <input type="text" id="depositTx" placeholder="Transaction Hash / Proof">
-    <button onclick="submitDeposit()">Submit Deposit</button>
-
-    <h2>Withdraw Funds</h2>
-    <input type="number" id="withdrawAmount" placeholder="Amount">
-    <input type="text" id="withdrawWallet" placeholder="Wallet Address">
-    <button onclick="submitWithdrawal()">Request Withdrawal</button>
-
-    <h2>Investment Plans</h2>
-    <select id="planSelect"></select>
-    <input type="number" id="investAmount" placeholder="Amount">
-    <button onclick="invest()">Invest</button>
-
-    <h2>Your Investments</h2>
-    <div id="investments"></div>
-  </div>
-
-  <script src="js/auth.js"></script>
-  <script src="js/dashboard.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
