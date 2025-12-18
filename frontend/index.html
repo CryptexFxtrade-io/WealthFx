@@ -6,42 +6,44 @@
   <title>FxWealth</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.3/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body class="bg-gray-100 flex items-center justify-center min-h-screen">
-  <div class="w-full max-w-md bg-white p-8 rounded-xl shadow-md">
-    <h1 class="text-2xl font-bold text-center mb-6">FxWealth</h1>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+
+  <div class="w-full max-w-3xl bg-white p-8 rounded-xl shadow-xl">
+    
+    <!-- Header -->
+    <h1 class="text-3xl font-bold text-center text-blue-600 mb-6">FxWealth</h1>
+    
+    <!-- Tabs -->
+    <div class="flex justify-center mb-6 space-x-4">
+      <button id="tab-login" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600" onclick="showTab('login')">Login</button>
+      <button id="tab-register" class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600" onclick="showTab('register')">Register</button>
+      <button id="tab-dashboard" class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 hidden" onclick="showTab('dashboard')">Dashboard</button>
+    </div>
 
     <!-- Forms Container -->
-    <div id="formContainer">
-      <!-- Login Form -->
-      <div id="loginForm">
-        <h2 class="text-xl mb-4">Login</h2>
-        <input type="email" id="loginEmail" placeholder="Email" class="w-full mb-2 p-2 border rounded">
-        <input type="password" id="loginPassword" placeholder="Password" class="w-full mb-2 p-2 border rounded">
-        <button onclick="login()" class="w-full bg-blue-500 text-white p-2 rounded">Login</button>
-        <p id="loginResult" class="mt-2 text-red-500"></p>
-        <p class="mt-4 text-sm text-gray-600">Don't have an account? <span onclick="showRegister()" class="text-blue-500 cursor-pointer">Register</span></p>
-      </div>
-
-      <!-- Register Form -->
-      <div id="registerForm" class="hidden">
-        <h2 class="text-xl mb-4">Register</h2>
-        <input type="email" id="regEmail" placeholder="Email" class="w-full mb-2 p-2 border rounded">
-        <input type="password" id="regPassword" placeholder="Password" class="w-full mb-2 p-2 border rounded">
-        <button onclick="register()" class="w-full bg-green-500 text-white p-2 rounded">Register</button>
-        <p id="regResult" class="mt-2 text-red-500"></p>
-        <p class="mt-4 text-sm text-gray-600">Already have an account? <span onclick="showLogin()" class="text-blue-500 cursor-pointer">Login</span></p>
-      </div>
+    <div id="loginForm" class="space-y-4">
+      <input type="email" id="loginEmail" placeholder="Email" class="w-full p-3 border rounded">
+      <input type="password" id="loginPassword" placeholder="Password" class="w-full p-3 border rounded">
+      <button onclick="login()" class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600">Login</button>
+      <p id="loginResult" class="text-red-500 mt-2"></p>
     </div>
 
-    <!-- Investments Section -->
-    <div id="dashboard" class="hidden mt-6">
-      <h2 class="text-xl mb-4">Your Investments</h2>
-      <button onclick="getInvestments()" class="bg-blue-500 text-white px-4 py-2 rounded mb-4">Fetch Investments</button>
-      <pre id="investments" class="bg-gray-100 p-4 rounded shadow h-40 overflow-auto"></pre>
-      <button onclick="logout()" class="mt-4 bg-red-500 text-white px-4 py-2 rounded">Logout</button>
+    <div id="registerForm" class="space-y-4 hidden">
+      <input type="email" id="regEmail" placeholder="Email" class="w-full p-3 border rounded">
+      <input type="password" id="regPassword" placeholder="Password" class="w-full p-3 border rounded">
+      <button onclick="register()" class="w-full bg-green-500 text-white py-2 rounded hover:bg-green-600">Register</button>
+      <p id="regResult" class="text-red-500 mt-2"></p>
     </div>
+
+    <div id="dashboard" class="hidden">
+      <h2 class="text-2xl font-semibold mb-4">Your Investments</h2>
+      <button onclick="getInvestments()" class="mb-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Fetch Investments</button>
+      <pre id="investments" class="bg-gray-100 p-4 rounded shadow h-48 overflow-auto"></pre>
+      <button onclick="logout()" class="mt-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">Logout</button>
+    </div>
+
   </div>
 
   <script src="script.js"></script>
 </body>
-        </html>
+</html>
