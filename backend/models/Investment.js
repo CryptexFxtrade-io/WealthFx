@@ -8,4 +8,4 @@ const InvestmentSchema = new mongoose.Schema({
 });
 
 const Investment = mongoose.model("Investment", InvestmentSchema);
-export default Investment; // ✅ Default export
+export default Investment;
