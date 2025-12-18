@@ -1,7 +1,7 @@
-const BASE_URL = "https://wealthfx-net.onrender.com";
+const BASE_URL = "https://wealthfx-net.onrender.com"; // Your Render backend
 let jwtToken = localStorage.getItem("jwt") || "";
 
-// Tab switching
+// Show/Hide Tabs
 function showTab(tab) {
   document.getElementById("loginForm").classList.add("hidden");
   document.getElementById("registerForm").classList.add("hidden");
@@ -19,6 +19,7 @@ function showTab(tab) {
   } else if (tab === "dashboard") {
     document.getElementById("dashboard").classList.remove("hidden");
     document.getElementById("tab-dashboard").classList.remove("hidden");
+    fetchBalance();
   }
 }
 
@@ -66,7 +67,21 @@ function logout() {
   showTab("login");
 }
 
-// Fetch investments
+// Fetch Balance
+async function fetchBalance() {
+  if (!jwtToken) return alert("Please login first!");
+
+  const res = await fetch(`${BASE_URL}/api/auth/user`, {
+    headers: { "x-auth-token": jwtToken }
+  });
+
+  if (!res.ok) return;
+
+  const user = await res.json();
+  document.getElementById("balance").innerText = user.balance || 0;
+}
+
+// Fetch Investments
 async function getInvestments() {
   if (!jwtToken) return alert("Please login first!");
 
@@ -78,7 +93,7 @@ async function getInvestments() {
   document.getElementById("investments").innerText = JSON.stringify(data, null, 2);
 }
 
-// Auto-login
+// Auto-login if JWT exists
 if (jwtToken) {
   showTab("dashboard");
-}
+    }
