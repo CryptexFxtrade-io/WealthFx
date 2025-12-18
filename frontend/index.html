@@ -3,37 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FxWealth | Login/Register</title>
-  <link rel="stylesheet" href="css/style.css">
+  <title>FxWealth Frontend</title>
 </head>
 <body>
-  <div class="container">
-    <h1>FxWealth</h1>
+  <h1>FxWealth</h1>
 
-    <!-- Login Form -->
-    <div class="form-section">
-      <h2>Login</h2>
-      <form id="loginForm">
-        <input type="email" id="loginEmail" placeholder="Email" required>
-        <input type="password" id="loginPassword" placeholder="Password" required>
-        <button type="submit">Login</button>
-      </form>
-      <p class="switch">Don't have an account? <span id="showRegister">Register</span></p>
-    </div>
+  <h2>Register</h2>
+  <input type="email" id="regEmail" placeholder="Email">
+  <input type="password" id="regPassword" placeholder="Password">
+  <button onclick="register()">Register</button>
+  <p id="regResult"></p>
 
-    <!-- Register Form -->
-    <div class="form-section" style="display:none;">
-      <h2>Register</h2>
-      <form id="registerForm">
-        <input type="text" id="regName" placeholder="Full Name" required>
-        <input type="email" id="regEmail" placeholder="Email" required>
-        <input type="password" id="regPassword" placeholder="Password" required>
-        <button type="submit">Register</button>
-      </form>
-      <p class="switch">Already have an account? <span id="showLogin">Login</span></p>
-    </div>
-  </div>
+  <h2>Login</h2>
+  <input type="email" id="loginEmail" placeholder="Email">
+  <input type="password" id="loginPassword" placeholder="Password">
+  <button onclick="login()">Login</button>
+  <p id="loginResult"></p>
 
-  <script src="js/auth.js"></script>
+  <h2>Your Investments</h2>
+  <button onclick="getInvestments()">Fetch Investments</button>
+  <pre id="investments"></pre>
+
+  <script src="script.js"></script>
 </body>
 </html>
