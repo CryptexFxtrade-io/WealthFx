@@ -1,1 +1,25 @@
-require("./cron/roiJob");
+{
+  "name": "fxwealth-backend",
+  "version": "1.0.0",
+  "description": "FxWealth real investment platform backend",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "author": "Kiddieblizz",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.5.0",
+    "node-cron": "^3.0.2",
+    "nodemailer": "^6.9.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.3"
+  }
+}
