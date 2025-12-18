@@ -1,21 +1,14 @@
 {
   "name": "fxwealth-backend",
   "version": "1.0.0",
-  "description": "FxWealth Investment Backend",
   "main": "server.js",
-  "type": "module",
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
-    "bcryptjs": "^2.4.3",
+    "express": "^4.18.2",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
-    "express": "^4.18.2",
-    "jsonwebtoken": "^9.0.0",
-    "mongoose": "^7.5.0"
-  },
-  "engines": {
-    "node": "18.x"
+    "mongoose": "^7.7.0"
   }
 }
