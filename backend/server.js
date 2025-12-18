@@ -14,14 +14,15 @@ app.use(express.json());
 
 // Import routes
 const authRoutes = require("./routes/auth.js");
-const investmentRoutes = require("./routes/investments.js"); // if exists
+const investmentRoutes = require("./routes/investments.js"); // remove if no investment route yet
 
 // Use routes
 app.use("/api/auth", authRoutes);
-app.use("/api/investments", investmentRoutes); // if exists
+app.use("/api/investments", investmentRoutes); // remove if no investment route yet
 
 // Connect to MongoDB and start server
 const PORT = process.env.PORT || 5000;
+
 mongoose.connect(process.env.MONGO_URI)
   .then(() => {
     console.log("MongoDB connected");
