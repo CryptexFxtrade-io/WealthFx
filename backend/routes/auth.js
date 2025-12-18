@@ -1,35 +1,18 @@
-import express from "express";
-import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
-import User from "../models/User.js"; // ensure your User.js uses ESM export
-
+// routes/auth.js
+const express = require('express');
 const router = express.Router();
+const auth = require('../middleware/auth'); // JWT middleware
+const User = require('../models/User');
 
-router.post("/register", async (req, res) => {
+// GET current user info
+router.get('/user', auth, async (req, res) => {
   try {
-    const { email, password } = req.body;
-    const hashed = await bcrypt.hash(password, 10);
-    const user = await User.create({ email, password: hashed });
-    res.status(201).json({ message: "User created", user });
+    const user = await User.findById(req.user.id).select('-password'); // exclude password
+    if (!user) return res.status(404).json({ message: 'User not found' });
+    res.json(user);
   } catch (err) {
-    res.status(500).json({ message: "Server error" });
+    res.status(500).json({ message: 'Server error' });
   }
 });
 
-router.post("/login", async (req, res) => {
-  try {
-    const { email, password } = req.body;
-    const user = await User.findOne({ email });
-    if (!user) return res.status(400).json({ message: "Invalid credentials" });
-
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(400).json({ message: "Invalid credentials" });
-
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1d" });
-    res.json({ token });
-  } catch (err) {
-    res.status(500).json({ message: "Server error" });
-  }
-});
-
-export default router;
+module.exports = router;
