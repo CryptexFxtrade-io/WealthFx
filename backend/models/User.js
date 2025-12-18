@@ -5,8 +5,8 @@ const UserSchema = new mongoose.Schema({
   email: { type: String, unique: true },
   password: String,
   balance: { type: Number, default: 0 },
-  role: { type: String, default: "user" },
-  createdAt: { type: Date, default: Date.now }
-});
+  role: { type: String, default: "user" }, // user | admin
+  status: { type: String, default: "active" }
+}, { timestamps: true });
 
 module.exports = mongoose.model("User", UserSchema);
