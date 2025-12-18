@@ -14,11 +14,11 @@ app.use(express.json());
 
 // Import routes
 const authRoutes = require("./routes/auth.js");
-const investmentRoutes = require("./routes/investments.js"); // remove if no investment route yet
+// const investmentRoutes = require("./routes/investments.js"); // uncomment if you have this
 
 // Use routes
 app.use("/api/auth", authRoutes);
-app.use("/api/investments", investmentRoutes); // remove if no investment route yet
+// app.use("/api/investments", investmentRoutes); // uncomment if you have this
 
 // Connect to MongoDB and start server
 const PORT = process.env.PORT || 5000;
