@@ -1,53 +1,45 @@
-const express = require("express");
-const auth = require("../middleware/auth");
-const User = require("../models/User");
-const Deposit = require("../models/Deposit");
-const Withdrawal = require("../models/Withdrawal");
-
-const router = express.Router();
+const Plan = require("../models/Plan");
+const Investment = require("../models/Investment");
 
 /**
- * GET logged-in user
+ * GET ACTIVE PLANS (USER)
  */
-router.get("/me", auth, async (req, res) => {
-    const user = await User.findById(req.user.id).select("-password");
-    res.json(user);
+router.get("/plans", auth, async (req, res) => {
+  const plans = await Plan.find({ active: true });
+  res.json(plans);
 });
 
 /**
- * CREATE DEPOSIT (PENDING)
+ * INVEST IN PLAN
  */
-router.post("/deposit", auth, async (req, res) => {
-    const { amount, currency, txHash } = req.body;
+router.post("/invest", auth, async (req, res) => {
+  const { planId, amount } = req.body;
 
-              const deposit = await Deposit.create({
-       userId: req.user.id,
-    amount,
-    currency,
-    txHash
-   );
- 
- res.json({ msg: "Deposit submitted, awaiting approval", deposit });
-});
-/
-**
- * CREATE WITHDRAWAL REQUEST
- */
-router.post("/withdraw", auth, async (req, res) => {
-  const { amount, walletAddress } = req.body;
- 
- const user = await User.findById(req.user.id);
+  const plan = await Plan.findById(planId);
+  if (!plan || !plan.active)
+    return res.status(400).json({ msg: "Invalid plan" });
+
+  if (amount < plan.min || amount > plan.max)
+    return res.status(400).json({ msg: "Amount not within plan range" });
+
+  const user = await User.findById(req.user.id);
   if (user.balance < amount)
     return res.status(400).json({ msg: "Insufficient balance" });
- 
- const withdrawal = await Withdrawal.create({
-    userId: req.user.id,
+
+  // Lock funds
+  user.balance -= amount;
+  await user.save();
+
+  const endDate = new Date();
+  endDate.setDate(endDate.getDate() + plan.durationDays);
+
+  const investment = await Investment.create({
+    userId: user._id,
+    planId,
     amount,
-    walletAddress
- } );
- 
- res.json({ msg: "Withdrawal request submitted", withdrawal });
+    profit: 0,
+    endDate
+  });
+
+  res.json({ msg: "Investment successful", investment });
 });
-m
-odule.exports = router;
-}      
