@@ -1,27 +1,28 @@
-const Plan = require("../models/Plan");
-const Investment = require("../models/Investment");
-
 /**
- * CREATE INVESTMENT PLAN
+ * CREDIT ROI & COMPLETE INVESTMENT
  */
-router.post("/create-plan", auth, admin, async (req, res) => {
-  const { name, min, max, roiPercent, durationDays } = req.body;
+router.post("/credit-roi", auth, admin, async (req, res) => {
+  const { investmentId } = req.body;
 
-  const plan = await Plan.create({
-    name,
-    min,
-    max,
-    roiPercent,
-    durationDays
+  const investment = await Investment.findById(investmentId);
+  if (!investment || investment.status !== "active")
+    return res.status(400).json({ msg: "Invalid investment" });
+
+  const plan = await Plan.findById(investment.planId);
+  const user = await User.findById(investment.userId);
+
+  const profit = (investment.amount * plan.roiPercent) / 100;
+
+  investment.profit = profit;
+  investment.status = "completed";
+
+  user.balance += investment.amount + profit;
+
+  await investment.save();
+  await user.save();
+
+  res.json({
+    msg: "ROI credited & investment completed",
+    profit
   });
-
-  res.json({ msg: "Investment plan created", plan });
-});
-
-/**
- * GET ALL PLANS
- */
-router.get("/plans", auth, admin, async (req, res) => {
-  const plans = await Plan.find();
-  res.json(plans);
 });
