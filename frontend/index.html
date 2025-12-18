@@ -3,27 +3,45 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FxWealth Frontend</title>
+  <title>FxWealth</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.3/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
-  <h1>FxWealth</h1>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+  <div class="w-full max-w-md bg-white p-8 rounded-xl shadow-md">
+    <h1 class="text-2xl font-bold text-center mb-6">FxWealth</h1>
 
-  <h2>Register</h2>
-  <input type="email" id="regEmail" placeholder="Email">
-  <input type="password" id="regPassword" placeholder="Password">
-  <button onclick="register()">Register</button>
-  <p id="regResult"></p>
+    <!-- Forms Container -->
+    <div id="formContainer">
+      <!-- Login Form -->
+      <div id="loginForm">
+        <h2 class="text-xl mb-4">Login</h2>
+        <input type="email" id="loginEmail" placeholder="Email" class="w-full mb-2 p-2 border rounded">
+        <input type="password" id="loginPassword" placeholder="Password" class="w-full mb-2 p-2 border rounded">
+        <button onclick="login()" class="w-full bg-blue-500 text-white p-2 rounded">Login</button>
+        <p id="loginResult" class="mt-2 text-red-500"></p>
+        <p class="mt-4 text-sm text-gray-600">Don't have an account? <span onclick="showRegister()" class="text-blue-500 cursor-pointer">Register</span></p>
+      </div>
 
-  <h2>Login</h2>
-  <input type="email" id="loginEmail" placeholder="Email">
-  <input type="password" id="loginPassword" placeholder="Password">
-  <button onclick="login()">Login</button>
-  <p id="loginResult"></p>
+      <!-- Register Form -->
+      <div id="registerForm" class="hidden">
+        <h2 class="text-xl mb-4">Register</h2>
+        <input type="email" id="regEmail" placeholder="Email" class="w-full mb-2 p-2 border rounded">
+        <input type="password" id="regPassword" placeholder="Password" class="w-full mb-2 p-2 border rounded">
+        <button onclick="register()" class="w-full bg-green-500 text-white p-2 rounded">Register</button>
+        <p id="regResult" class="mt-2 text-red-500"></p>
+        <p class="mt-4 text-sm text-gray-600">Already have an account? <span onclick="showLogin()" class="text-blue-500 cursor-pointer">Login</span></p>
+      </div>
+    </div>
 
-  <h2>Your Investments</h2>
-  <button onclick="getInvestments()">Fetch Investments</button>
-  <pre id="investments"></pre>
+    <!-- Investments Section -->
+    <div id="dashboard" class="hidden mt-6">
+      <h2 class="text-xl mb-4">Your Investments</h2>
+      <button onclick="getInvestments()" class="bg-blue-500 text-white px-4 py-2 rounded mb-4">Fetch Investments</button>
+      <pre id="investments" class="bg-gray-100 p-4 rounded shadow h-40 overflow-auto"></pre>
+      <button onclick="logout()" class="mt-4 bg-red-500 text-white px-4 py-2 rounded">Logout</button>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>
-</html>
+        </html>
