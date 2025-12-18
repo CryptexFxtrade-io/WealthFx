@@ -1,12 +1,11 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const InvestmentSchema = new mongoose.Schema({
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-  planId: { type: mongoose.Schema.Types.ObjectId, ref: "Plan" },
-  amount: Number,
-  profit: Number,
-  status: { type: String, default: "active" },
-  endDate: Date
-}, { timestamps: true });
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+  planId: { type: mongoose.Schema.Types.ObjectId, ref: "Plan", required: true },
+  amount: { type: Number, required: true },
+  date: { type: Date, default: Date.now },
+});
 
-module.exports = mongoose.model("Investment", InvestmentSchema);
+const Investment = mongoose.model("Investment", InvestmentSchema);
+export default Investment; // ✅ make it default export
